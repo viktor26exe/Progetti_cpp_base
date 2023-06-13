@@ -19,7 +19,10 @@ public:
     {
     }
 
+    virtual ~Figura() {} // serve per sicurezza ed evitare leek di memoria nella chiamata ai distruttori
+
     // la keyword virtual attiva il meccanismo di dynamic binding
+    // è obbligatoria
     virtual double perimetro() { return 10; }
 
 protected:
@@ -42,7 +45,10 @@ public:
     {
     }
 
+    ~Triangolo() override {}
+
     // override -> meccanismo di dynamic bindig
+    // non è obbligatoria ma consigliabile metterle per evitare errori
     double perimetro() override
     {
         return lato1 + lato2 + lato3;
@@ -101,4 +107,9 @@ public:
 
 protected:
     int raggio = 0;
+};
+
+class RettangoloAureo : public Rettangolo
+{
+    using Rettangolo::Rettangolo; // la direttiva using permette l'utilizzo del costruttore della classe madre
 };
